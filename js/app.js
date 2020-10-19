@@ -11,7 +11,8 @@ var leftProduct = document.getElementById('leftProduct');
 var middleProduct = document.getElementById('middletProduct');
 var rightProduct = document.getElementById('rightProduct');
 
-
+var votesArray = [];
+var viewsArray = [];
 
 
 Product.all = [];  // array of objects ..
@@ -22,6 +23,7 @@ function Product(pName, imgPath) {
     this.pImgPath = imgPath;
     this.views = 0;
     this.votes = 0;
+
     Product.all.push(this);
 }
 
@@ -54,38 +56,42 @@ for (var i = 0; i < prductsName.length; i++) {
 console.log(Product.all);
 
 
-function getRandom(min,max){
-    
+function getRandom(min, max) {
+
     return Math.floor(Math.random() * (max - min + 1)) + min;
-    
+
 }
 
 var leftIndex;
 var middleIndex;
 var rightIndex;
-var arrayOfIndices =[];
+
+var arrayOfIndices = [];
+
 function render() {
+    leftIndex = Product.all[getRandom(0, Product.all.length - 1)];
+    middleIndex = Product.all[getRandom(0, Product.all.length - 1)];
+    rightIndex = Product.all[getRandom(0, Product.all.length - 1)];
 
-    getRandom(0,Product.all.length - 1);
+    for (var i = 0; i < arrayOfIndices.length; i++) {
+
+        do {
+            leftIndex = Product.all[getRandom(0, Product.all.length - 1)];
+
+        } while (arrayOfIndices[i] === leftIndex);
+        do {
+            middleIndex = Product.all[getRandom(0, Product.all.length - 1)];
+
+        } while (middleIndex === leftIndex || arrayOfIndices[i] === middleIndex);
+        do{
+            rightIndex = Product.all[getRandom(0, Product.all.length - 1)];
     
-    do {
-        
-        leftIndex = Product.all[getRandom(0,Product.all.length - 1)];
-        middleIndex = Product.all[getRandom(0,Product.all.length - 1)];
-        rightIndex = Product.all[getRandom(0,Product.all.length - 1)];
-        
-    } while (leftIndex === rightIndex || leftIndex === middleIndex || rightIndex === middleIndex);
-
-    while(arrayOfIndices[0] === leftIndex || arrayOfIndices[1] === middleIndex || arrayOfIndices === rightIndex){
-
-        leftIndex = Product.all[getRandom(0,Product.all.length - 1)];
-        middleIndex = Product.all[getRandom(0,Product.all.length - 1)];
-        rightIndex = Product.all[getRandom(0,Product.all.length - 1)];
-
+        }while(rightIndex === leftIndex || rightIndex === middleIndex || arrayOfIndices[i] === rightIndex)
     }
-    
-    arrayOfIndices =[];
-    arrayOfIndices.push(leftIndex,rightIndex,middleIndex);
+
+
+    arrayOfIndices = [];
+    arrayOfIndices.push(leftIndex, rightIndex, middleIndex);
     console.log(arrayOfIndices);
 
     leftProduct.setAttribute('src', leftIndex.pImgPath);
@@ -144,6 +150,7 @@ function handlingProductsVoting(e) {
     }
     if (totalClicks === 25) {
         renderResult();
+        chartRender();
     }
 }
 
@@ -166,11 +173,51 @@ function renderResult() {
     productSection.removeEventListener('click', handlingProductsVoting)
 }
 
+function chartRender() {
 
 
+    for (var i = 0; i < Product.all.length; i++) {
+        votesArray.push(Product.all[i].votes);
+        viewsArray.push(Product.all[i].views);
+    }
 
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: prductsName,
+            datasets: [{
+                label: '# of Votes',
+                data: votesArray,
+                backgroundColor:
+                    'rgba(255, 99, 132, 0.2)',
+                borderColor:
+                    'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            },
+            {
+                label: '# of views',
+                data: viewsArray,
+                backgroundColor:
+                    'rgba(100, 99, 132, 0.2)',
+                borderColor:
+                    'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }],
 
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
 
+}
 
 
 
