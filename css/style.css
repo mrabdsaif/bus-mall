@@ -1,0 +1,33 @@
+img{
+    width: 200px;
+    height: 300px;
+    margin-left: 200px;
+    margin-top: 50px;
+}
+img:hover{
+    box-shadow: 2px 2px 3px 10px black;
+}
+
+body{
+    background-color: darkcyan;
+}
+h1{
+    font-size: 50px;
+    font-weight: bolder;
+    text-align: center;
+    color: darkred;
+    padding: 30px;
+    border: 3px solid darkred;
+    margin-top: 50px;
+}
+#results{
+    
+    display: inline-block;
+
+}
+li {
+    width: 100%;
+    margin: 2% 0 0 38%;
+    color: maroon;
+    font-size: 20px;
+}
