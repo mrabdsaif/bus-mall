@@ -123,7 +123,7 @@ function handlingProductsVoting(e) {
         totalClicks++;
 
     }
-    if (totalClicks == 2) {
+    if (totalClicks == 25) {
         renderResult();
     }
 }
