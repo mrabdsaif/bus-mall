@@ -57,8 +57,8 @@ console.log(Product.all);
 
 
 function getRandom() {
-var min =0;
-var max = Product.all.length -1;
+    var min = 0;
+    var max = Product.all.length - 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
 
 }
@@ -71,25 +71,20 @@ var arrayOfIndices = [];
 
 function render() {
 
-    leftIndex = Product.all[getRandom()];
-    middleIndex = Product.all[getRandom()];
-    rightIndex = Product.all[getRandom()];
 
-    for (var i = 0; i < arrayOfIndices.length; i++) {
+    do {
+        leftIndex = Product.all[getRandom()];
 
-        do {
-            leftIndex = Product.all[getRandom()];
+    } while (arrayOfIndices[0] === leftIndex || arrayOfIndices[1] === leftIndex || arrayOfIndices[2] === leftIndex);
 
-        } while (arrayOfIndices[i] === leftIndex);
-        do {
-            middleIndex = Product.all[getRandom()];
-
-        } while (middleIndex === leftIndex || arrayOfIndices[i] === middleIndex);
-        do{
-            rightIndex = Product.all[getRandom()];
-    
-        }while(rightIndex === leftIndex || rightIndex === middleIndex || arrayOfIndices[i] === rightIndex)
+    do {
+        middleIndex = Product.all[getRandom()];
     }
+    while (leftIndex === middleIndex || arrayOfIndices[0] === middleIndex || arrayOfIndices[1] === middleIndex || arrayOfIndices[2] === middleIndex);
+    do {
+        rightIndex = Product.all[getRandom()];
+
+    } while (leftIndex === rightIndex || middleIndex === rightIndex || arrayOfIndices[0] === rightIndex || arrayOfIndices[1] === rightIndex || arrayOfIndices[2] === rightIndex);
 
 
     arrayOfIndices = [];
