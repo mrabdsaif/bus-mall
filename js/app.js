@@ -53,28 +53,41 @@ for (var i = 0; i < prductsName.length; i++) {
 
 console.log(Product.all);
 
-var leftIndex;
-var middleIndex;
-var rightIndex;
 
 function getRandom(min,max){
-     
+    
     return Math.floor(Math.random() * (max - min + 1)) + min;
     
 }
 
+var leftIndex;
+var middleIndex;
+var rightIndex;
+var arrayOfIndices =[];
 function render() {
 
     getRandom(0,Product.all.length - 1);
     
     do {
+        
         leftIndex = Product.all[getRandom(0,Product.all.length - 1)];
         middleIndex = Product.all[getRandom(0,Product.all.length - 1)];
         rightIndex = Product.all[getRandom(0,Product.all.length - 1)];
         
     } while (leftIndex === rightIndex || leftIndex === middleIndex || rightIndex === middleIndex);
+
+    while(arrayOfIndices[0] === leftIndex || arrayOfIndices[1] === middleIndex || arrayOfIndices === rightIndex){
+
+        leftIndex = Product.all[getRandom(0,Product.all.length - 1)];
+        middleIndex = Product.all[getRandom(0,Product.all.length - 1)];
+        rightIndex = Product.all[getRandom(0,Product.all.length - 1)];
+
+    }
     
-    
+    arrayOfIndices =[];
+    arrayOfIndices.push(leftIndex,rightIndex,middleIndex);
+    console.log(arrayOfIndices);
+
     leftProduct.setAttribute('src', leftIndex.pImgPath);
     leftProduct.setAttribute('alt', 'This Image is Not supported');
     leftProduct.setAttribute('title', leftIndex.productName);
