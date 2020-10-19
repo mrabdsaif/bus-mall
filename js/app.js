@@ -27,7 +27,7 @@ function Product(pName, imgPath) {
 
 
 
-// instantiating new objects in a shot ...  instead of making 20 instance for each product ( object {product Name, product Path}) ^_-
+// instantiating new objects in a shot ...  instead of making 20 instance of the products ( object {product Name, product Path}) ^_-
 
 for (var i = 0; i < prductsName.length; i++) {
 
@@ -123,7 +123,7 @@ function handlingProductsVoting(e) {
         totalClicks++;
 
     }
-    if (totalClicks == 25) {
+    if (totalClicks === 25) {
         renderResult();
     }
 }
