@@ -56,8 +56,9 @@ for (var i = 0; i < prductsName.length; i++) {
 console.log(Product.all);
 
 
-function getRandom(min, max) {
-
+function getRandom() {
+var min =0;
+var max = Product.all.length -1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
 
 }
@@ -69,22 +70,23 @@ var rightIndex;
 var arrayOfIndices = [];
 
 function render() {
-    leftIndex = Product.all[getRandom(0, Product.all.length - 1)];
-    middleIndex = Product.all[getRandom(0, Product.all.length - 1)];
-    rightIndex = Product.all[getRandom(0, Product.all.length - 1)];
+
+    leftIndex = Product.all[getRandom()];
+    middleIndex = Product.all[getRandom()];
+    rightIndex = Product.all[getRandom()];
 
     for (var i = 0; i < arrayOfIndices.length; i++) {
 
         do {
-            leftIndex = Product.all[getRandom(0, Product.all.length - 1)];
+            leftIndex = Product.all[getRandom()];
 
         } while (arrayOfIndices[i] === leftIndex);
         do {
-            middleIndex = Product.all[getRandom(0, Product.all.length - 1)];
+            middleIndex = Product.all[getRandom()];
 
         } while (middleIndex === leftIndex || arrayOfIndices[i] === middleIndex);
         do{
-            rightIndex = Product.all[getRandom(0, Product.all.length - 1)];
+            rightIndex = Product.all[getRandom()];
     
         }while(rightIndex === leftIndex || rightIndex === middleIndex || arrayOfIndices[i] === rightIndex)
     }
@@ -109,9 +111,9 @@ function render() {
 }
 render();
 
+
 var totalClicks = 0;
 productSection.addEventListener('click', handlingProductsVoting);
-
 
 function handlingProductsVoting(e) {
 
