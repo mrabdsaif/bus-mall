@@ -57,21 +57,24 @@ var leftIndex;
 var middleIndex;
 var rightIndex;
 
+function getRandom(min,max){
+     
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+    
+}
+
 function render() {
 
-    var min = 0; // (index 0 ) in the array of objects...
-    var max = Product.all.length - 1;  // the length is 7 but we need 6 ....
-
-    // Random Number between 0 and 6 ... 
-    var leftRandom = Math.floor(Math.random() * (max - min + 1)) + min;
-    var middleRandom = Math.floor(Math.random() * (max - min + 1)) + min;
-    var rightRandom = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    leftIndex = Product.all[leftRandom];
-    middleIndex = Product.all[middleRandom];
-    rightIndex = Product.all[rightRandom];
-
-
+    getRandom(0,Product.all.length - 1);
+    
+    do {
+        leftIndex = Product.all[getRandom(0,Product.all.length - 1)];
+        middleIndex = Product.all[getRandom(0,Product.all.length - 1)];
+        rightIndex = Product.all[getRandom(0,Product.all.length - 1)];
+        
+    } while (leftIndex === rightIndex || leftIndex === middleIndex || rightIndex === middleIndex);
+    
+    
     leftProduct.setAttribute('src', leftIndex.pImgPath);
     leftProduct.setAttribute('alt', 'This Image is Not supported');
     leftProduct.setAttribute('title', leftIndex.productName);
@@ -121,6 +124,9 @@ function handlingProductsVoting(e) {
 
     } else {
         totalClicks++;
+        leftIndex.views++;
+        middleIndex.views++;
+        rightIndex.views++;
 
     }
     if (totalClicks === 25) {
