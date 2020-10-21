@@ -6,6 +6,7 @@ var prductsName = ['banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'cha
     'wine-glass'];
 
 var productSection = document.querySelector('#allproducts');
+var displayNone = document.querySelector('#displayNone');
 
 var leftProduct = document.getElementById('leftProduct');
 var middleProduct = document.getElementById('middletProduct');
@@ -31,6 +32,7 @@ function Product(pName, imgPath) {
 
 // instantiating new objects in a shot ...  instead of making 20 instance of the products ( object {product Name, product Path}) ^_-
 
+// ** we can use prototype function ... to use ProductName property and easier rendering the required for indices (13 &16)
 for (var i = 0; i < prductsName.length; i++) {
 
     if (i == 13) {// editing indices (13 & 16 ) cause their different extenssions ... just as the following 
@@ -115,46 +117,48 @@ function handlingProductsVoting(e) {
     render();
 
     console.log(e.target.id);
+    if (totalClicks < 10) {
 
-    if (e.target.id == 'leftProduct') {
+        if (e.target.id !== 'allproducts') {
 
-        totalClicks++;
+            totalClicks++;
+            leftIndex.views++;  // if the left index appeard in this section (allProduct) then add to the views (1) ....
+            middleIndex.views++;
+            rightIndex.views++;
 
-        leftIndex.votes++;
-        leftIndex.views++;
+            // console.log(totalClicks);
 
-        // console.log(totalClicks);
+            if (e.target.id == 'leftProduct') {
 
-    } else if (e.target.id == 'middletProduct') {
+                leftIndex.votes++;  // if the left index was clicked (voted) then add to the votes (1) ....
 
-        totalClicks++;
+            } else if (e.target.id == 'middletProduct') {
 
-        middleIndex.votes++;
-        middleIndex.views++;
+                middleIndex.votes++;
 
-    } else if (e.target.id == 'rightProduct') {
+            } else if (e.target.id == 'rightProduct') {
 
-        totalClicks++;
-        rightIndex.votes++;
-        rightIndex.views++;
+                rightIndex.votes++;
 
-    } else {
-        totalClicks++;
-        leftIndex.views++;
-        middleIndex.views++;
-        rightIndex.views++;
+            }
+            localStorage.setItem('userSelections', JSON.stringify(Product.all));
 
-    }
-    if (totalClicks === 25) {
-        renderResult();
-        chartRender();
+        }
+
+    } else if (totalClicks === 10) {
+        // productSection.removeEventListener('click', handlingProductsVoting)
+
+        displayNone.innerHTML = '';
+        document.getElementById('viewResults').addEventListener('click', renderResult);
+        document.getElementById('viewResults').addEventListener('click', chartRender);
+
+        userSelections();
     }
 }
 
 
 function renderResult() {
 
-    productSection.innerHTML = '';
 
     var ulE = document.createElement('ul');
     productSection.appendChild(ulE);
@@ -215,6 +219,48 @@ function chartRender() {
     });
 
 }
+
+
+
+function userSelections() {
+
+    localStorage.setItem('userSelections', JSON.stringify(Product.all));
+}
+
+function getObjectsFromLs() {
+    var userObjectArray = localStorage.getItem('userSelections');
+
+    // condition to excute parsing the user array if it has a data...
+    if (userObjectArray) { // This condtion means If userObjectArray empty do nothing ... nothing will render or assigned into the storage
+
+        Product.all = JSON.parse(userObjectArray);
+        renderResult();
+    }
+}
+console.log(Product.all);
+getObjectsFromLs();
+console.log(Product.all);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

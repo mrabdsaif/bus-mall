@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,35 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
+
 <body>
     <header>
-<h1>Voting For Products</h1>
+        <h1>Voting For Products</h1>
     </header>
     <main>
         <section id="allproducts">
-            <img src=""  id="leftProduct" >
-            <img src=""  id="middletProduct">
-            <img src=""  id="rightProduct" >
+            <div id="displayNone">
+                <img src="" id="leftProduct">
+                <img src="" id="middletProduct">
+                <img src="" id="rightProduct">
+            </div>
+            
+            <button id="viewResults">View Results</button>
         </section>
-    </main>
-    <ul id="results">
+        
 
-    </ul>
+        <section id="resultSection">
+            <ul id="results">
+
+            </ul>
+        </section>
+
+    </main>
+
     <canvas id="myChart" width="30%" height="10px"></canvas>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>

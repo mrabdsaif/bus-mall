@@ -20,6 +20,7 @@ h1{
     border: 3px solid darkred;
     margin-top: 50px;
 }
+
 #results{
     
     display: inline-block;
@@ -30,4 +31,17 @@ li {
     margin: 2% auto;
     color: maroon;
     font-size: 20px;
+}
+
+#viewResults{
+    margin: 5% 43%;
+    padding: 8px 20px;
+    border: none;
+    box-shadow: 2px 2px 3px black;
+    background-color: maroon;
+    color: lightgray;
+}
+#viewResults:hover{
+    background-color: black;
+    color: white;
 }
